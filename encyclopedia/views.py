@@ -6,6 +6,8 @@ from django.shortcuts import render
 
 import random
 
+import markdown2 as md
+
 from . import util
 
 class CreateNewPageForm(forms.Form):
@@ -37,7 +39,7 @@ def view_entry(request, title):
     if content:
         return render(request, "encyclopedia/view_entry.html", {
             "title": title,
-            "content": content
+            "content": md.markdown(content)
         })
     else:
         return render(request, "encyclopedia/404.html")
