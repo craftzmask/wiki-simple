@@ -35,3 +35,15 @@ def get_entry(title):
         return f.read().decode("utf-8")
     except FileNotFoundError:
         return None
+
+def check_exist(title):
+    """
+    Check existence of an entry by its title. If no such
+    entry exists, the function returns False.
+    """
+    for entry in list_entries():
+        if title.casefold() == entry.casefold():
+            return True
+        
+    return False
+    
