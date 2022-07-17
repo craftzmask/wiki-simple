@@ -29,6 +29,13 @@
                     {% endblock %}
                 </div>
                 <div class="main col-lg-10 col-md-9">
+                    {% if messages %}
+                        <ul class="messages">
+                            {% for message in messages %}
+                                <li class="{{ message.tags }} alert alert-danger" role="alert">{{ message }}</li>
+                            {% endfor %}
+                        </ul>
+                    {% endif %}
                     {% block body %}
                     {% endblock %}
                 </div>
