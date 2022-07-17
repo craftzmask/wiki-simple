@@ -4,6 +4,8 @@ from django.urls import reverse
 from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
+import random
+
 from . import util
 
 class CreateNewPageForm(forms.Form):
@@ -98,3 +100,9 @@ def search(request):
     return render(request, "encyclopedia/search_results.html", {
         "entries": matches
     })
+    
+def random_page(request):
+    return HttpResponseRedirect(reverse(
+        "encyclopedia:get_entry",
+        kwargs={"title": random.choice(util.list_entries())}
+    ))
