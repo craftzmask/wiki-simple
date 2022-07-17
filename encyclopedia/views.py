@@ -32,10 +32,10 @@ def index(request):
         "entries": util.list_entries()
     })
 
-def get_entry(request, title):
+def view_entry(request, title):
     content = util.get_entry(title)
     if content:
-        return render(request, "encyclopedia/entry.html", {
+        return render(request, "encyclopedia/view_entry.html", {
             "title": title,
             "content": content
         })
@@ -53,7 +53,7 @@ def create_entry(request):
                 content = form.cleaned_data["content"]
                 util.save_entry(title, content)
                 return HttpResponseRedirect(reverse(
-                    "encyclopedia:get_entry",
+                    "encyclopedia:view_entry",
                     kwargs={"title": title}
                 ))
             
@@ -72,7 +72,7 @@ def edit_entry(request, title):
             content = form.cleaned_data["content"]
             util.save_entry(title, content)
             return HttpResponseRedirect(reverse(
-                "encyclopedia:get_entry",
+                "encyclopedia:view_entry",
                 kwargs={"title": title}
             ))
     
@@ -93,7 +93,7 @@ def search(request):
             
     if len(matches) == 1 and q == matches[0]:
         return HttpResponseRedirect(reverse(
-            "encyclopedia:get_entry",
+            "encyclopedia:view_entry",
             kwargs={'title': q}
         ))
         
@@ -103,6 +103,6 @@ def search(request):
     
 def random_page(request):
     return HttpResponseRedirect(reverse(
-        "encyclopedia:get_entry",
+        "encyclopedia:view_entry",
         kwargs={"title": random.choice(util.list_entries())}
     ))
