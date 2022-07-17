@@ -1,7 +1,8 @@
+from django.urls import reverse
+from django.http import HttpResponseRedirect
 from django.shortcuts import render
 
 from . import util
-
 
 def index(request):
     return render(request, "encyclopedia/index.html", {
@@ -17,4 +18,22 @@ def get_entry(request, title):
         })
     else:
         return render(request, "encyclopedia/404.html")
+    
+def search(request):
+    q = request.GET["q"]
+    
+    matches = []
+    for entry in util.list_entries():
+        if q.casefold() in entry.casefold():
+            matches.append(entry.casefold())
+            
+    if len(matches) == 1 and q == matches[0]:
+        return HttpResponseRedirect(reverse(
+            "encyclopedia:get_entry",
+            kwargs={'title': q}
+        ))
+        
+    return render(request, "encyclopedia/search_results.html", {
+        "entries": matches
+    })
     
