@@ -4,9 +4,14 @@
     {{ title }}
 {% endblock %}
 
-{% block body %}
-    {{ content | safe }}
-    <a href="{% url 'encyclopedia:edit_entry' title %}">
-        <i class="h2 text-secondary bi bi-pencil-square"></i>
+{% block nav_item %}
+    <a class="nav-link active btn btn-white text-dark pt-0" href="{% url 'encyclopedia:edit_entry' title %}">
+        <i class="h3 text-dark bi bi-pencil-square"></i>
     </a>
+{% endblock %}
+
+{% block body %}
+    <div class="px-3">
+        {{ content | safe }}
+    </div>
 {% endblock %}

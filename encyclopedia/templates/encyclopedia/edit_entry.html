@@ -5,9 +5,18 @@
 {% endblock %}
 
 {% block body %}
-    <form action="{% url 'encyclopedia:edit_entry' title %}" method="post">
-        {% csrf_token %}
-        {{ form.as_p }}
-        <input type="submit" value="Save">
-    </form>
+    <div class="mt-5 px-3">
+        <h1 class="mb-3">{{ title }}</h1>
+        <form action="{% url 'encyclopedia:edit_entry' title %}" method="post">
+            {% csrf_token %}
+            {% for field in form %}
+                <div class="mb-3">
+                    {{ field.errors }}
+                    {{ field }}
+                </div>
+            {% endfor %}
+            <input type="submit" class="btn btn-secondary rounded-pill" value="Save">
+            <a href="{% url 'encyclopedia:view_entry' title %}" class="btn btn-outline-secondary rounded-pill">Cancel</a>
+        </form>
+    </div>
 {% endblock %}

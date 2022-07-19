@@ -11,7 +11,7 @@
     </head>
     <body>
         <div class="container-fluid d-flex">
-            <div class="col-4 d-flex flex-column flex-shrink-0 p-3 border-bottom" style="height: 76px;">
+            <div class="col-4 d-flex flex-column flex-shrink-0 p-3 border-bottom" style="height: 66px;">
                 <a href="{% url 'encyclopedia:index' %}" class="d-flex align-items-center link-dark text-decoration-none">
                     <img src="{% static 'encyclopedia/logo-text.png' %}" alt="" width="139" height="23">
                 </a>
@@ -19,7 +19,7 @@
                 {% endblock %}
             </div>
 
-            <main class="col-4 mt-3 border-bottom" style="height: 60px;">
+            <main class="col-4 mt-3 border-bottom" style="height: 50px;">
                 {% if messages %}
                     <ul class="messages">
                         {% for message in messages %}
@@ -29,22 +29,25 @@
                 {% endif %}
                 
                 <form action="{% url 'encyclopedia:search' %}" class="navbar-nav bg-light border rounded-pill mb-4">
-                    <div class="input-group input-group">
+                    <div class="input-group">
                         <span class="input-group-text bg-light border-0 rounded-pill"><i class="bi bi-search"></i></span>
-                        <input class="form-control bg-light border-0 rounded-pill p-0" type="text" name="q" placeholder="Search Encyclopedia">
+                        <input class="form-control shadow-none bg-light border-0 rounded-pill p-0" type="text" name="q" placeholder="Search Encyclopedia">
                     </div>
-                </form>  
+                </form>
+
                 {% block body %}
                 {% endblock %}
             </main>
 
-            <div class="col-4 mt-3 border-bottom" style="height: 60px;">
+            <div class="col-4 mt-3 border-bottom" style="height: 50px;">
                 <div class="d-flex flex-row justify-content-end">
-                    <a class="nav-link active border btn btn-light mx-1" href="{% url 'encyclopedia:create_entry' %}">
-                        <i class="bi bi-plus-square"></i>
+                    {% block nav_item %}
+                    {% endblock %}
+                    <a class="nav-link active btn btn-white text-dark pt-0" href="{% url 'encyclopedia:create_entry' %}">
+                        <i class="h3 fw-light bi bi-plus-square"></i>
                     </a>
-                    <a class="nav-link active border btn btn-light mx-1" href="{% url 'encyclopedia:random_page' %}">
-                        <i class="bi bi-dice-3"></i>
+                    <a class="nav-link active btn btn-white text-dark pt-0" href="{% url 'encyclopedia:random_page' %}">
+                        <i class="h3 bi bi-dice-3"></i>
                     </a>
                 </div>
             </div>

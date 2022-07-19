@@ -12,21 +12,20 @@ from . import util
 
 class CreateNewPageForm(forms.Form):
     title = forms.CharField(label="", widget=forms.TextInput(attrs={
+        "class": "form-control",
         "placeholder": "Title"
     }))
     content = forms.CharField(label="", widget=forms.Textarea(attrs={
+        "class": "form-control",
         "placeholder": "Content",
-        'rows': 80, 'cols':20
+        'rows': 10
     }))
     
 class EditPageForm(forms.Form):
-    title = forms.CharField(label="", widget=forms.TextInput(attrs={
-        "placeholder": "Title",
-        'readonly': True
-    }))
     content = forms.CharField(label="", widget=forms.Textarea(attrs={
+        "class": "form-control",
         "placeholder": "Content",
-        'rows': 80, 'cols':20
+        "rows": 10
     }))
 
 def index(request):
