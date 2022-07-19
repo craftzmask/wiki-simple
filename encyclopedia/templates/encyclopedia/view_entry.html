@@ -6,5 +6,7 @@
 
 {% block body %}
     {{ content | safe }}
-    <a href="{% url 'encyclopedia:edit_entry' title %}">Edit</a>
+    <a href="{% url 'encyclopedia:edit_entry' title %}">
+        <i class="h2 text-secondary bi bi-pencil-square"></i>
+    </a>
 {% endblock %}
